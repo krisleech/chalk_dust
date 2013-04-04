@@ -8,6 +8,9 @@ that activity. This creates an activty feed per subscriber (more data) which
 scales better and allows additional features such as feed to delete/hide
 activity items.
 
+[![Code Climate](https://codeclimate.com/github/krisleech/chalk-dust.png)](https://codeclimate.com/github/krisleech/chalk-dust)
+[![Build Status](https://travis-ci.org/krisleech/chalk-dust.png)](https://travis-ci.org/krisleech/chalk-dust)
+
 ## Installation
 
 Add this line to your application's Gemfile:
