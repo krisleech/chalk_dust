@@ -22,4 +22,19 @@ ActiveRecord::Schema.define do
     t.string  :publisher_type
     t.timestamps
   end
+
+  create_table :activity_items, :force => true do |t|
+    t.integer :performer_id
+    t.string  :performer_type
+
+    t.string  :event
+
+    t.integer :target_id
+    t.string  :target_type
+
+    t.integer :owner_id
+    t.string  :owner_type
+
+    t.timestamps
+  end
 end

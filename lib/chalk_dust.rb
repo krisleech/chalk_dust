@@ -11,6 +11,14 @@ module ChalkDust
     end
   end
 
+  class ActivityItem < ActiveRecord::Base
+    belongs_to :performer, :polymorphic => true
+    belongs_to :target,    :polymorphic => true
+    belongs_to :owner,     :polymorphic => true
+
+    validates :event, :presence => true
+  end
+
   def self.subscribe(subscriber, options)
     publisher  = options.fetch(:to)
     undirected = options.fetch(:undirected, false)
@@ -24,5 +32,16 @@ module ChalkDust
 
   def self.self_subscribe(publisher_subscriber)
     subscribe(publisher_subscriber, :to => publisher_subscriber)
+  end
+
+  # publishes an event where X (performer) did Y (event) to Z (target) to every
+  # subscriber of the target
+  def self.publish_event(performer, event, target)
+    subscribers_of(target).map do |subscriber|
+      ActivityItem.create(:performer => performer,
+                          :event     => event,
+                          :target    => target,
+                          :owner     => subscriber)
+    end
   end
 end
