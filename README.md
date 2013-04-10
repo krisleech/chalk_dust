@@ -15,7 +15,9 @@ activity items.
 
 Add this line to your application's Gemfile:
 
-    gem 'chalk_dust'
+```ruby
+gem 'chalk_dust'
+```
 
 ## Usage
 
