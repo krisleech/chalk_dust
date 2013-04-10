@@ -72,6 +72,7 @@ ChalkDust.publish_event(user, 'added', comment, :root => comment.post)
 
 or
 
+(TODO)
 ```ruby
 class Comment < ActiveRecord::Base
   belongs_to :post

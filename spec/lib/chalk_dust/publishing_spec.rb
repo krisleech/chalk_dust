@@ -55,6 +55,8 @@ describe 'publishing' do
         end
       end
     end
+
+    # pending 'target root can be set by the `activity_root` method on the target'
   end
 end
 
