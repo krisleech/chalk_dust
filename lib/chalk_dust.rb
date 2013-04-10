@@ -17,6 +17,11 @@ module ChalkDust
     belongs_to :owner,     :polymorphic => true
 
     validates :event, :presence => true
+
+    def self.for_owner(owner)
+      where(:owner_id => owner.id,
+            :owner_type => owner.class.to_s)
+    end
   end
 
   def self.subscribe(subscriber, options)
@@ -44,5 +49,9 @@ module ChalkDust
                           :target    => target,
                           :owner     => subscriber)
     end
+  end
+
+  def self.activity_feed_for(subscriber)
+    ActivityItem.for_owner(subscriber)
   end
 end
