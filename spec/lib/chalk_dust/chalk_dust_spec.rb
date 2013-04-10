@@ -14,6 +14,16 @@ describe ChalkDust do
       connection.subscriber.should == user
       connection.publisher.should == post
     end
+
+    it '.self_subscribe connects object to itself' do
+      user = User.create!
+
+      ChalkDust.self_subscribe(user)
+
+      connection = ChalkDust::Connection.first
+      connection.subscriber.should == user
+      connection.publisher.should == user
+    end
   end
 
   describe 'fetching subscriptions' do

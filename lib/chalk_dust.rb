@@ -19,4 +19,8 @@ module ChalkDust
   def self.subscribers_of(publisher)
     Connection.subscribers_of(publisher)
   end
+
+  def self.self_subscribe(publisher_subscriber)
+    subscribe(publisher_subscriber, :to => publisher_subscriber)
+  end
 end
