@@ -22,6 +22,10 @@ module ChalkDust
       where(:owner_id => owner.id,
             :owner_type => owner.class.to_s)
     end
+
+    def self.since(time)
+      where("created_at >= ?", time)
+    end
   end
 
   def self.subscribe(subscriber, options)
@@ -51,7 +55,9 @@ module ChalkDust
     end
   end
 
-  def self.activity_feed_for(subscriber)
-    ActivityItem.for_owner(subscriber)
+  def self.activity_feed_for(subscriber, options = {})
+    activity_items = ActivityItem.for_owner(subscriber)
+    activity_items = activity_items.since(options[:since]) if options[:since].present?
+    activity_items
   end
 end
