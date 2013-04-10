@@ -32,6 +32,29 @@ describe 'publishing' do
       activity_item.target.should == post
       activity_item.owner.should == lindsey
     end
+
+    describe 'options' do
+      describe ':root' do
+        it 'sets the root object of the target' do
+          kris    = User.create!
+          lindsey = User.create!
+          post    = Post.create!
+          comment = Comment.create!(:post => post)
+
+          ChalkDust::Connection.create(:subscriber => lindsey, :publisher => post)
+
+          activity_items = ChalkDust.publish_event(kris, 'added', comment, :root => comment.post)
+
+          activity_items.size.should == 1
+
+          activity_item = activity_items.first
+          activity_item.performer.should == kris
+          activity_item.event.should == 'added'
+          activity_item.target.should == comment
+          activity_item.owner.should == lindsey
+        end
+      end
+    end
   end
 end
 

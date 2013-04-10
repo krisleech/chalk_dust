@@ -15,6 +15,14 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  create_table :comments, :force => true do |t|
+    t.integer :id
+    t.integer :user_id
+    t.integer :post_id
+    t.string  :body
+    t.timestamps
+  end
+
   create_table :connections, :force => true do |t|
     t.integer :subscriber_id
     t.string  :subscriber_type

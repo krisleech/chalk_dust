@@ -36,8 +36,9 @@ module ChalkDust
 
   # publishes an event where X (performer) did Y (event) to Z (target) to every
   # subscriber of the target
-  def self.publish_event(performer, event, target)
-    subscribers_of(target).map do |subscriber|
+  def self.publish_event(performer, event, target, options = {})
+    root_publisher = options.fetch(:root, target)
+    subscribers_of(root_publisher).map do |subscriber|
       ActivityItem.create(:performer => performer,
                           :event     => event,
                           :target    => target,
