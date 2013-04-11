@@ -1,4 +1,5 @@
 require "chalk_dust/version"
+require "chalk_dust/rails" if defined?(Rails)
 
 module ChalkDust
   class Connection < ActiveRecord::Base
