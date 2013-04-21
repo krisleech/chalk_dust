@@ -9,7 +9,7 @@ scales better and allows additional features such as feed to delete/hide
 activity items.
 
 [![Code Climate](https://codeclimate.com/github/krisleech/chalk-dust.png)](https://codeclimate.com/github/krisleech/chalk-dust)
-[![Build Status](https://travis-ci.org/krisleech/chalk-dust.png)](https://travis-ci.org/krisleech/chalk-dust)
+[![Build Status](https://travis-ci.org/krisleech/chalk-dust.png?branch=master)](https://travis-ci.org/krisleech/chalk-dust)
 
 ## Installation
 
