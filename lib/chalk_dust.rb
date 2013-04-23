@@ -75,15 +75,16 @@ module ChalkDust
   end
 
   def self.activity_feed_for(subscriber, options = {})
+    topic = options.fetch(:topic, blank_topic)
     activity_items = ActivityItem.for_owner(subscriber)
-    activity_items = activity_items.since(options[:since])      if options[:since].present?
-    activity_items = activity_items.with_topic(options[:topic]) if options[:topic].present?
+    activity_items = activity_items.since(options[:since]) if options[:since].present?
+    activity_items = activity_items.with_topic(topic)
     activity_items
   end
 
   private
 
   def self.blank_topic
-    'none'
+    nil
   end
 end

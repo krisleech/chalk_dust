@@ -9,7 +9,7 @@ class ChalkDustCreateTables < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :connections, [:publisher_id, :publisher_type]
+    add_index :connections, [:publisher_id, :publisher_type, :topic]
 
     create_table :activity_items, :force => true do |t|
       t.integer :performer_id
@@ -22,13 +22,6 @@ class ChalkDustCreateTables < ActiveRecord::Migration
       t.string  :topic
       t.timestamps
     end
-
-    add_index :connections, [:subscriber_id, :subscriber_type,
-                             :publisher_id,  :publisher_type]
-
-    add_index :connections, [:subscriber_id, :subscriber_type,
-                             :publisher_id,  :publisher_type,
-                             :topic]
 
     add_index :activity_items, [:owner_id, :owner_type, :created_at]
     add_index :activity_items, [:owner_id, :owner_type, :created_at, :topic]

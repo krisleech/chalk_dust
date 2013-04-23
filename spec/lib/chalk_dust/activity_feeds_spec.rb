@@ -50,26 +50,48 @@ describe 'activity feeds' do
         activity_items.should == [activity_item_2]
       end
 
-      it ':topic limits activites to those with given topic' do
-        kris    = User.create!
-        hallie  = User.create!
-        post    = Post.create!
+      describe ':topic' do
+        it 'limits activites to those without a topic when no topic given' do
+          kris    = User.create!
+          hallie  = User.create!
+          post    = Post.create!
 
-        activity_item_1 = ChalkDust::ActivityItem.create(:performer => kris,
-                            :event     => 'editted',
-                            :target    => post,
-                            :owner     => hallie)
+          activity_item = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'liked',
+                              :target    => post,
+                              :owner     => hallie,
+                              :topic     => 'family')
 
-        activity_item_2 = ChalkDust::ActivityItem.create(:performer => kris,
-                            :event     => 'liked',
-                            :target    => post,
-                            :owner     => hallie,
-                            :topic     => 'family')
+          activity_items = ChalkDust.activity_feed_for(hallie)
+          activity_items.should_not include activity_item
+        end
 
-        activity_items = ChalkDust.activity_feed_for(hallie, :topic => 'family')
-        activity_items.should == [activity_item_2]
+        it 'limits activites to those with given topic' do
+          kris    = User.create!
+          hallie  = User.create!
+          post    = Post.create!
+
+          activity_item_1 = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'editted',
+                              :target    => post,
+                              :owner     => hallie)
+
+          activity_item_2 = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'editted',
+                              :target    => post,
+                              :owner     => hallie,
+                              :topic     => 'work')
+
+          activity_item_3 = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'liked',
+                              :target    => post,
+                              :owner     => hallie,
+                              :topic     => 'family')
+
+          activity_items = ChalkDust.activity_feed_for(hallie, :topic => 'family')
+          activity_items.should == [activity_item_3]
+        end
       end
     end
   end
 end
-
