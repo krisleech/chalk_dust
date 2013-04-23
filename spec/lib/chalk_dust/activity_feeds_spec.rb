@@ -49,6 +49,26 @@ describe 'activity feeds' do
         activity_items = ChalkDust.activity_feed_for(hallie, :since => Time.now - 1.week)
         activity_items.should == [activity_item_2]
       end
+
+      it ':topic limits activites to those with given topic' do
+        kris    = User.create!
+        hallie  = User.create!
+        post    = Post.create!
+
+        activity_item_1 = ChalkDust::ActivityItem.create(:performer => kris,
+                            :event     => 'editted',
+                            :target    => post,
+                            :owner     => hallie)
+
+        activity_item_2 = ChalkDust::ActivityItem.create(:performer => kris,
+                            :event     => 'liked',
+                            :target    => post,
+                            :owner     => hallie,
+                            :topic     => 'family')
+
+        activity_items = ChalkDust.activity_feed_for(hallie, :topic => 'family')
+        activity_items.should == [activity_item_2]
+      end
     end
   end
 end
