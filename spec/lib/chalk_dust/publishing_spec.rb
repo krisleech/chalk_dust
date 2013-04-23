@@ -54,6 +54,22 @@ describe 'publishing' do
           activity_item.owner.should == lindsey
         end
       end
+
+      describe ':topic' do
+        it 'sets the topic' do
+          user    = User.create!
+          post    = Post.create!
+
+          ChalkDust::Connection.create(:subscriber => user,
+                                       :publisher  => post,
+                                       :topic      => 'family')
+
+          activity_items = ChalkDust.publish_event(user, 'liked', post, :topic => 'family')
+
+          activity_item = activity_items.first
+          activity_item.topic.should == 'family'
+        end
+      end
     end
 
     # pending 'target root can be set by the `activity_root` method on the target'

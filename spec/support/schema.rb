@@ -44,6 +44,8 @@ ActiveRecord::Schema.define do
     t.integer :owner_id
     t.string  :owner_type
 
+    t.string  :topic
+
     t.timestamps
   end
 end
