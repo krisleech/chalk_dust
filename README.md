@@ -8,6 +8,9 @@ that activity. This creates an activty feed per subscriber (more data) which
 scales better and allows additional features such as feed to delete/hide
 activity items.
 
+Each can object can optionally have multiple feeds, for examples "work" and
+"family".
+
 [![Code Climate](https://codeclimate.com/github/krisleech/chalk-dust.png)](https://codeclimate.com/github/krisleech/chalk-dust)
 [![Build Status](https://travis-ci.org/krisleech/chalk-dust.png?branch=master)](https://travis-ci.org/krisleech/chalk-dust)
 
@@ -63,6 +66,21 @@ ChalkDust.subscribe(bob,   :to => alice)
 ChalkDust.subscribe(alice, :to => bob)
 ```
 
+#### Topics
+
+If you want to the subscription to only apply to events with a particular topic
+you can do so as follows:
+
+```ruby
+ChalkDust.subscribe(alice, :to => bob, :topic => 'work')
+ChalkDust.subscribe(alice, :to => bob, :topic => 'family')
+```
+
+This is useful if you need to publish multiple activity feeds for an object.
+
+Example uses for this would be seperate public and private activity streams 
+for an object, or something like circles.
+
 ### Publishing activity
 
 Describes an event where X (performer) did Y (activity) to Z (target).
@@ -92,11 +110,28 @@ class Comment < ActiveRecord::Base
 end
 ```
 
+#### Topics
+
+Publish an event to a specific topic:
+
+```ruby
+ChalkDust.publish_event(user, 'uploaded', photo, :root => user,
+                                                 :topic => 'family')
+```
+
 ### Activity Feeds
 
 ```ruby
 ChalkDust.activity_feed_for(user, :since => 2.weeks.ago)
 ChalkDust.activity_feed_for(post, :since => 2.weeks.ago)
+```
+
+#### Topics
+
+Fetch an activity feed for a specific topic:
+
+```ruby
+ChalkDust.activity_feed_for(user, :topic => 'family')
 ```
 
 ## Contributing
