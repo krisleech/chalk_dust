@@ -5,6 +5,7 @@ class ChalkDustCreateTables < ActiveRecord::Migration
       t.string  :subscriber_type
       t.integer :publisher_id
       t.string  :publisher_type
+      t.string  :topic
       t.timestamps
     end
 
@@ -22,5 +23,6 @@ class ChalkDustCreateTables < ActiveRecord::Migration
     end
 
     add_index :activity_items, [:owner_id, :owner_type, :created_at]
+    add_index :activity_items, [:owner_id, :owner_type, :created_at, :topic]
   end
 end

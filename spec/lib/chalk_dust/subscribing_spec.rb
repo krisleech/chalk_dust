@@ -42,6 +42,16 @@ describe ChalkDust do
         connection_2.subscriber.should == alice
         connection_2.publisher.should  == bob
       end
+
+      it ':topic sets the subscription topic' do
+        bob = User.create!
+        alice = User.create!
+
+        ChalkDust.subscribe(bob, :to => alice, :topic => 'work')
+
+        connection = ChalkDust::Connection.first
+        connection.topic.should == 'work'
+      end
     end
   end
 

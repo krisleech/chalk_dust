@@ -32,8 +32,15 @@ module ChalkDust
   def self.subscribe(subscriber, options)
     publisher  = options.fetch(:to)
     undirected = options.fetch(:undirected, false)
-    Connection.create(:subscriber => subscriber, :publisher => publisher)
-    Connection.create(:subscriber => publisher,  :publisher => subscriber) if undirected
+    topic      = options.fetch(:topic, 'none')
+
+    Connection.create(:subscriber => subscriber,
+                      :publisher => publisher,
+                      :topic => topic)
+
+    Connection.create(:subscriber => publisher,
+                      :publisher => subscriber,
+                      :topic => topic) if undirected
   end
 
   def self.subscribers_of(publisher)

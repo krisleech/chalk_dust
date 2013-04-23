@@ -28,6 +28,7 @@ ActiveRecord::Schema.define do
     t.string  :subscriber_type
     t.integer :publisher_id
     t.string  :publisher_type
+    t.string  :topic
     t.timestamps
   end
 
