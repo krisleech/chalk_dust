@@ -6,9 +6,9 @@ module ChalkDust
     belongs_to :publisher,  :polymorphic => true
     belongs_to :subscriber, :polymorphic => true
 
-    def self.subscribers_of(publisher)
+    def self.for_publisher(publisher)
       where(:publisher_id => publisher.id,
-            :publisher_type => publisher.class.to_s).map(&:subscriber)
+            :publisher_type => publisher.class.to_s)
     end
   end
 
@@ -37,7 +37,12 @@ module ChalkDust
   end
 
   def self.subscribers_of(publisher)
-    Connection.subscribers_of(publisher)
+    Connection.for_publisher(publisher).map(&:subscriber)
+  end
+
+  def self.subscribed?(subscriber, options)
+    publisher = options.fetch(:to)
+    subscribers_of(publisher).include?(subscriber)
   end
 
   def self.self_subscribe(publisher_subscriber)

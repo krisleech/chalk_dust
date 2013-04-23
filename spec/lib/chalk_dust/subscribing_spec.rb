@@ -55,4 +55,16 @@ describe ChalkDust do
       ChalkDust.subscribers_of(post).should == [user]
     end
   end
+
+  describe 'querying subscriptions' do
+    it '.subscribed? returns true when given object is subscriber to at least one event' do
+      user = User.create!
+      post = Post.create!
+
+      ChalkDust::Connection.create!(:subscriber => user, :publisher => post)
+
+      ChalkDust.subscribed?(user, :to => post).should be_true
+      ChalkDust.subscribed?(post, :to => user).should be_false
+    end
+  end
 end
