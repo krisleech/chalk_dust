@@ -57,7 +57,7 @@ describe ChalkDust do
   end
 
   describe 'querying subscriptions' do
-    it '.subscribed? returns true when given object is subscriber to at least one event' do
+    it '.subscribed? returns true when given object is subscribed to another' do
       user = User.create!
       post = Post.create!
 
