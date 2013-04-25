@@ -4,12 +4,12 @@ ChalkDust can be used to build activty feeds such as followings and friendships
 by allowing models to subscribe to activity feeds published by other models.
 
 Every time an activity occurs it is copied to all subscribers of the target of
-that activity. This creates an activty feed per subscriber (more data) which
-scales better and allows additional features such as feed to delete/hide
-activity items.
+that activity. This creates an activty feed per subscriber. This results in
+more data but scales better and allows additional features such as the ability
+of the subscriber to delete/hide activity items.
 
-Each can object can optionally have multiple feeds, for examples "work" and
-"family".
+Each publisher can create multiple feeds by means of topics. For example a
+user might publish activities with topics of 'family' or 'work'.
 
 [![Code Climate](https://codeclimate.com/github/krisleech/chalk-dust.png)](https://codeclimate.com/github/krisleech/chalk-dust)
 [![Build Status](https://travis-ci.org/krisleech/chalk-dust.png?branch=master)](https://travis-ci.org/krisleech/chalk-dust)
@@ -40,7 +40,7 @@ ChalkDust.subscribe(user, :to => post)
 ```
 
 ```ruby
-ChalkDust.subscribers_of(post) # => [user, post]
+ChalkDust.subscribers_of(post) # => [user]
 ```
 
 #### Self-subscribing
@@ -68,8 +68,8 @@ ChalkDust.subscribe(alice, :to => bob)
 
 #### Topics
 
-If you want to the subscription to only apply to events with a particular topic
-you can do so as follows:
+If you want the subscription to only apply to activities with a particular
+topic you can do so as follows:
 
 ```ruby
 ChalkDust.subscribe(alice, :to => bob, :topic => 'work')
@@ -78,7 +78,7 @@ ChalkDust.subscribe(alice, :to => bob, :topic => 'family')
 
 This is useful if you need to publish multiple activity feeds for an object.
 
-Example uses for this would be seperate public and private activity streams 
+Example uses for this would be seperate public and private activity streams
 for an object, or something like circles.
 
 ### Publishing activity
@@ -89,25 +89,11 @@ Describes an event where X (performer) did Y (activity) to Z (target).
 ChalkDust.publish_event(user, 'added', comment)
 ```
 
-If the activity should be published to the feed of an object other 
-than the target then it can be either be passed as an additional argument or
-provided as a method called `activity_root`.
+If the activity should be published to the feed of an object other than the
+target then it can be either be passed with the `:root` argument:
 
 ```ruby
 ChalkDust.publish_event(user, 'added', comment, :root => comment.post)
-```
-
-or
-
-(TODO)
-```ruby
-class Comment < ActiveRecord::Base
-  belongs_to :post
-
-  def activity_root
-    post
-  end
-end
 ```
 
 #### Topics
