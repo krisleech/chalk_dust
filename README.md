@@ -60,7 +60,7 @@ All subscriptions are directed. You can create a two way subscription, e.g a
 friendship, as follows:
 
 ```ruby
-ChalkDust.subscribe(bob, :to => alice, :undirected => true)
+ChalkDust.subscribe(bob,   :to => alice, :undirected => true)
 # or
 ChalkDust.subscribe(bob,   :to => alice)
 ChalkDust.subscribe(alice, :to => bob)
