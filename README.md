@@ -112,7 +112,7 @@ end
 
 #### Topics
 
-Publish an event to a specific topic:
+Optionally publish an event to a specific topic:
 
 ```ruby
 ChalkDust.publish_event(user, 'uploaded', photo, :root => user,
@@ -133,6 +133,17 @@ Fetch an activity feed for a specific topic:
 ```ruby
 ChalkDust.activity_feed_for(user, :topic => 'family')
 ```
+
+If you do not specify a topic you will only get activities which where not
+published with a topic. To get all activities (those with and without a topic)
+pass `:all` to `:topic`:
+
+```ruby
+ChalkDust.activity_feed_for(user, :topic => :all)
+```
+
+You can still use `'all'` as a regular topic, but you can not specify it as a
+symbol as you can with other topics.
 
 ## Contributing
 

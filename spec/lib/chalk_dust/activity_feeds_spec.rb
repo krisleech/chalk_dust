@@ -91,6 +91,26 @@ describe 'activity feeds' do
           activity_items = ChalkDust.activity_feed_for(hallie, :topic => 'family')
           activity_items.should == [activity_item_3]
         end
+
+        it 'given :all returns all activities' do
+          kris    = User.create!
+          hallie  = User.create!
+          post    = Post.create!
+
+          activity_item_1 = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'editted',
+                              :target    => post,
+                              :owner     => hallie)
+
+          activity_item_2 = ChalkDust::ActivityItem.create(:performer => kris,
+                              :event     => 'editted',
+                              :target    => post,
+                              :owner     => hallie,
+                              :topic     => 'work')
+
+          activity_items = ChalkDust.activity_feed_for(hallie, :topic => :all)
+          activity_items.should == [activity_item_1, activity_item_2]
+        end
       end
     end
   end
