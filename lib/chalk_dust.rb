@@ -23,6 +23,10 @@ module ChalkDust
       where(:owner_id => owner.id,
             :owner_type => owner.class.to_s)
     end
+    
+    def self.with_topic(topic)
+      where(:topic => topic)
+    end
 
     def self.since(time)
       where("created_at >= ?", time)
@@ -32,8 +36,15 @@ module ChalkDust
   def self.subscribe(subscriber, options)
     publisher  = options.fetch(:to)
     undirected = options.fetch(:undirected, false)
-    Connection.create(:subscriber => subscriber, :publisher => publisher)
-    Connection.create(:subscriber => publisher,  :publisher => subscriber) if undirected
+    topic      = options.fetch(:topic, blank_topic)
+
+    Connection.create(:subscriber => subscriber,
+                      :publisher => publisher,
+                      :topic => topic)
+
+    Connection.create(:subscriber => publisher,
+                      :publisher => subscriber,
+                      :topic => topic) if undirected
   end
 
   def self.subscribers_of(publisher)
@@ -53,17 +64,27 @@ module ChalkDust
   # subscriber of the target
   def self.publish_event(performer, event, target, options = {})
     root_publisher = options.fetch(:root, target)
+    topic          = options.fetch(:topic, blank_topic)
     subscribers_of(root_publisher).map do |subscriber|
       ActivityItem.create(:performer => performer,
                           :event     => event,
                           :target    => target,
-                          :owner     => subscriber)
+                          :owner     => subscriber,
+                          :topic     => topic)
     end
   end
 
   def self.activity_feed_for(subscriber, options = {})
+    topic = options.fetch(:topic, blank_topic)
     activity_items = ActivityItem.for_owner(subscriber)
     activity_items = activity_items.since(options[:since]) if options[:since].present?
+    activity_items = activity_items.with_topic(topic) unless topic == :all
     activity_items
+  end
+
+  private
+
+  def self.blank_topic
+    nil
   end
 end
