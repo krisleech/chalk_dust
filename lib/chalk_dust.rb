@@ -1,38 +1,9 @@
 require "chalk_dust/version"
+require "chalk_dust/connection"
+require "chalk_dust/activity_item"
 require "chalk_dust/rails" if defined?(Rails)
 
 module ChalkDust
-  class Connection < ActiveRecord::Base
-    belongs_to :publisher,  :polymorphic => true
-    belongs_to :subscriber, :polymorphic => true
-
-    def self.for_publisher(publisher)
-      where(:publisher_id => publisher.id,
-            :publisher_type => publisher.class.to_s)
-    end
-  end
-
-  class ActivityItem < ActiveRecord::Base
-    belongs_to :performer, :polymorphic => true
-    belongs_to :target,    :polymorphic => true
-    belongs_to :owner,     :polymorphic => true
-
-    validates :event, :presence => true
-
-    def self.for_owner(owner)
-      where(:owner_id => owner.id,
-            :owner_type => owner.class.to_s)
-    end
-    
-    def self.with_topic(topic)
-      where(:topic => topic)
-    end
-
-    def self.since(time)
-      where("created_at >= ?", time)
-    end
-  end
-
   def self.subscribe(subscriber, options)
     publisher  = options.fetch(:to)
     undirected = options.fetch(:undirected, false)
