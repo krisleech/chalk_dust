@@ -131,6 +131,14 @@ ChalkDust.activity_feed_for(user, :topic => :all)
 You can still use `'all'` as a regular topic, but you can not specify it as a
 symbol as you can with other topics.
 
+### Unsubscribing
+
+```ruby
+ChalkDust.unsubscribe(user, :from => post)
+ChalkDust.unsubscribe(user, :from => post, :topic => 'work')
+ChalkDust.unsubscribe(user, :from => post, :topic => :all)
+```
+
 ## Contributing
 
 Contributions welcome, please fork and send a pull request.

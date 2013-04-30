@@ -18,6 +18,14 @@ module ChalkDust
                       :topic => topic) if undirected
   end
 
+  def self.unsubscribe(subscriber, options)
+    publisher = options.fetch(:from)
+    topic     = options.fetch(:topic, blank_topic)
+    Connection.delete(:subscriber => subscriber,
+                      :publisher  => publisher,
+                      :topic      => topic)
+  end
+
   def self.subscribers_of(publisher)
     Connection.for_publisher(publisher).map(&:subscriber)
   end
