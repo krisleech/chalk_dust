@@ -4,8 +4,26 @@ require File.expand_path('../lib/chalk_dust/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Kris Leech"]
   gem.email         = ["kris.leech@gmail.com"]
-  gem.description   = %q{Subscribe to and build activity feeds for your models, for example followings and friendships}
-  gem.summary       = %q{Subscribe to and build activity feeds for your models, for example followings and friendships}
+  gem.description   = <<-DESC
+    Subscriptions connect models, events build activity feeds.
+
+    Designed to scale.
+
+    ChalkDust can be used to build activty feeds such as followings and
+    friendships by allowing models to subscribe to activity feeds published by
+    other models.
+
+    Every time an activity occurs it is copied to all subscribers of the target
+    of that activity. This creates an activty feed per subscriber. This results
+    in more data but scales better and allows additional features such as the
+    ability of the subscriber to delete/hide activity items.
+
+    Each publisher can create multiple feeds by means of topics. For example a
+    user might publish activities with topics of 'family' or 'work'.
+
+    Please check the documentation <https://github.com/krisleech/chalk-dust>.
+  DESC
+  gem.summary       = %q{Subscribe to and build activity feeds for your models, for example followings and friendships. Build to scale.}
   gem.homepage      = "https://github.com/krisleech/chalk-dust"
 
   gem.files         = `git ls-files`.split($\)

@@ -1,5 +1,9 @@
 # ChalkDust
 
+Subscriptions connect models, events build activity feeds.
+
+Designed to scale.
+
 ChalkDust can be used to build activty feeds such as followings and friendships
 by allowing models to subscribe to activity feeds published by other models.
 
