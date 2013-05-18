@@ -147,6 +147,13 @@ ChalkDust.unsubscribe(user, :from => post, :topic => :all)
 
 Contributions welcome, please fork and send a pull request.
 
+## Compatibility
+
+Tested with MRI 1.9.x, MRI 2.0.0, JRuby (1.9 and 2.0 mode) against both
+ActiveRecord 3.0 and 4.0.
+
+See the [build status](https://travis-ci.org/krisleech/chalk-dust) for details.
+
 ## Thanks
 
 Thanks to Igor @ Lifetrip Limited for allowing this code to be open sourced.
