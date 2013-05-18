@@ -8,3 +8,9 @@ rvm:
   - '2.0.0'
   - jruby-19mode
   - jruby-20mode
+matrix:
+  exclude:
+    - rvm: jruby-19mode
+      gemfile: gemfiles/activerecord-4.0
+    - rvm: jruby-20mode
+      gemfile: gemfiles/activerecord-4.0
