@@ -26,8 +26,8 @@ Add this line to your application's Gemfile:
 gem 'chalk_dust'
 ```
 
-ChalkDust has a dependency on ActiveRecord and a soft dependency on Rails. If
-you are using Rails you can install the migrations as follows:
+ChalkDust has a dependency on ActiveRecord (3.0 or 4.0) and a soft dependency
+on Rails. If you are using Rails you can install the migrations as follows:
 
 ```
 rails generate chalk_dust:install_migrations
