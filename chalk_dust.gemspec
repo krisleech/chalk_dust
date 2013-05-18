@@ -44,6 +44,6 @@ Gem::Specification.new do |gem|
   if defined? JRUBY_VERSION
     gem.add_development_dependency "activerecord-jdbcsqlite3-adapter"
   else
-    gem.add_development_dependency "sqlite3-ruby"
+    gem.add_development_dependency "sqlite3"
   end
 end
