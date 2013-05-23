@@ -41,10 +41,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec", "~> 2.3"
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'
-
-  if defined? JRUBY_VERSION
-    gem.add_development_dependency "activerecord-jdbcsqlite3-adapter"
-  else
-    gem.add_development_dependency "sqlite3"
-  end
 end
