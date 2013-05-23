@@ -2,14 +2,12 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :test do
-  platforms :ruby do
-    gem "sqlite3"
-  end
+platforms :ruby do
+  gem "sqlite3", :platform => :ruby
+end
 
-  platforms :jruby do
-    gem "activerecord-jdbcsqlite3-adapter"
-  end
+platforms :jruby do
+  gem "activerecord-jdbcsqlite3-adapter"
 end
 
 group :development do
