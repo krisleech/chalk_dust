@@ -24,6 +24,6 @@ class ChalkDustCreateTables < ActiveRecord::Migration
     end
 
     add_index :activity_items, [:owner_id, :owner_type, :created_at]
-    add_index :activity_items, [:owner_id, :owner_type, :created_at, :topic]
+    add_index :activity_items, [:owner_id, :owner_type, :created_at, :topic], :name => 'activity_items_owner_id_type_created_at_topic'
   end
 end
