@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
   DESC
   gem.summary               = %q{Subscribe to and build activity feeds for your models, for example followings and friendships. Build to scale.}
   gem.homepage              = "https://github.com/krisleech/chalk_dust"
+  gem.license               = "MIT"
 
   gem.files                 = `git ls-files`.split($\)
   gem.executables           = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
