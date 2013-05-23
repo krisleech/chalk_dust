@@ -15,8 +15,8 @@ of the subscriber to delete/hide activity items.
 Each publisher can create multiple feeds by means of topics. For example a
 user might publish activities with topics of 'family' or 'work'.
 
-[![Code Climate](https://codeclimate.com/github/krisleech/chalk-dust.png)](https://codeclimate.com/github/krisleech/chalk-dust)
-[![Build Status](https://travis-ci.org/krisleech/chalk-dust.png?branch=master)](https://travis-ci.org/krisleech/chalk-dust)
+[![Code Climate](https://codeclimate.com/github/krisleech/chalk_dust.png)](https://codeclimate.com/github/krisleech/chalk_dust)
+[![Build Status](https://travis-ci.org/krisleech/chalk_dust.png?branch=master)](https://travis-ci.org/krisleech/chalk_dust)
 
 ## Installation
 
@@ -152,7 +152,7 @@ Contributions welcome, please fork and send a pull request.
 Tested with MRI 1.9.x, MRI 2.0.0, JRuby (1.9 and 2.0 mode) against both
 ActiveRecord 3.0 and 4.0.
 
-See the [build status](https://travis-ci.org/krisleech/chalk-dust) for details.
+See the [build status](https://travis-ci.org/krisleech/chalk_dust) for details.
 
 ## Thanks
 

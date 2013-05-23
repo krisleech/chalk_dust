@@ -21,10 +21,10 @@ Gem::Specification.new do |gem|
     Each publisher can create multiple feeds by means of topics. For example a
     user might publish activities with topics of 'family' or 'work'.
 
-    Please check the documentation <https://github.com/krisleech/chalk-dust>.
+    Please check the documentation <https://github.com/krisleech/chalk_dust>.
   DESC
   gem.summary               = %q{Subscribe to and build activity feeds for your models, for example followings and friendships. Build to scale.}
-  gem.homepage              = "https://github.com/krisleech/chalk-dust"
+  gem.homepage              = "https://github.com/krisleech/chalk_dust"
 
   gem.files                 = `git ls-files`.split($\)
   gem.executables           = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
