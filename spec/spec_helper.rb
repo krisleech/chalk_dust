@@ -4,6 +4,8 @@ SimpleCov.start
 require 'active_record'
 require 'chalk_dust'
 
+puts "Using ActiveRecord #{ActiveRecord::VERSION::STRING}"
+
 adapter = RUBY_PLATFORM == "java" ? 'jdbcsqlite3' : 'sqlite3'
 
 ActiveRecord::Base.establish_connection(:adapter => adapter,
