@@ -2,21 +2,18 @@ ActiveRecord::Schema.define do
   self.verbose = false
 
   create_table :users, :force => true do |t|
-    t.integer :id
     t.string  :name
     t.string :email
     t.timestamps
   end
 
   create_table :posts, :force => true do |t|
-    t.integer :id
     t.string  :title
     t.string :body
     t.timestamps
   end
 
   create_table :comments, :force => true do |t|
-    t.integer :id
     t.integer :user_id
     t.integer :post_id
     t.string  :body

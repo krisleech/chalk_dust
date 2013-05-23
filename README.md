@@ -1,5 +1,9 @@
 # ChalkDust
 
+Subscriptions connect models, events build activity feeds.
+
+Designed to scale.
+
 ChalkDust can be used to build activty feeds such as followings and friendships
 by allowing models to subscribe to activity feeds published by other models.
 
@@ -22,8 +26,8 @@ Add this line to your application's Gemfile:
 gem 'chalk_dust'
 ```
 
-ChalkDust has a dependency on ActiveRecord and a soft dependency on Rails. If
-you are using Rails you can install the migrations as follows:
+ChalkDust has a dependency on ActiveRecord (3.0 or 4.0) and a soft dependency
+on Rails. If you are using Rails you can install the migrations as follows:
 
 ```
 rails generate chalk_dust:install_migrations
@@ -142,6 +146,13 @@ ChalkDust.unsubscribe(user, :from => post, :topic => :all)
 ## Contributing
 
 Contributions welcome, please fork and send a pull request.
+
+## Compatibility
+
+Tested with MRI 1.9.x, MRI 2.0.0, JRuby (1.9 and 2.0 mode) against both
+ActiveRecord 3.0 and 4.0.
+
+See the [build status](https://travis-ci.org/krisleech/chalk-dust) for details.
 
 ## Thanks
 
