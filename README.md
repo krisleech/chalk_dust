@@ -8,7 +8,7 @@ ChalkDust can be used to build activty feeds such as followings and friendships
 by allowing models to subscribe to activity feeds published by other models.
 
 Every time an activity occurs it is copied to all subscribers of the target of
-that activity. This creates an activty feed per subscriber. This results in
+that activity. This creates an activity feed per subscriber. This results in
 more data but scales better and allows additional features such as the ability
 of the subscriber to delete/hide activity items.
 
