@@ -10,11 +10,6 @@ rvm:
   - jruby-20mode
 matrix:
   exclude:
-    # A bug in activerecord-jdbc-adapter prevents this working
-    - rvm: jruby-19mode
-      gemfile: gemfiles/activerecord-4.0
-    - rvm: jruby-20mode
-      gemfile: gemfiles/activerecord-4.0
     # ActiveRecord 4.0 requires Ruby 1.9.3 or better
     - rvm: 1.9.2
       gemfile: gemfiles/activerecord-4.0
