@@ -15,7 +15,7 @@ describe ChalkDust do
       connection.publisher.should == post
     end
 
-    it '.subscribe is a noop when objects already connected with no topic' do
+    it '.subscribe does not connect subjects multiple times for no topic' do
       user = User.create!
       post = Post.create!
 
@@ -25,7 +25,7 @@ describe ChalkDust do
       }.to change{ ChalkDust::Connection.count }.by(1)
     end
 
-    it '.subscribe is a noop when objects already connected with same topic' do
+    it '.subscribe does not connect subjects multiple times for the same topic' do
       user = User.create!
       post = Post.create!
 
@@ -35,7 +35,7 @@ describe ChalkDust do
       }.to change{ ChalkDust::Connection.count }.by(1)
     end
 
-    it '.subscribe happens when objects connected but have different topics' do
+    it '.subscribe does connect subjects multiple times for different topics' do
       user = User.create!
       post = Post.create!
 
@@ -97,14 +97,45 @@ describe ChalkDust do
   end
 
   describe 'querying subscriptions' do
-    it '.subscribed? returns true when given object is subscribed to another' do
-      user = User.create!
-      post = Post.create!
+    let(:user) { User.create! }
+    let(:post) { Post.create! }
 
-      ChalkDust::Connection.create!(:subscriber => user, :publisher => post)
+    context 'no connection between subjects' do
+      it '.subscribed? returns false when no topic given' do
+        ChalkDust.subscribed?(user, :to => post).should be_false
+      end
 
-      ChalkDust.subscribed?(user, :to => post).should be_true
-      ChalkDust.subscribed?(post, :to => user).should be_false
+      it '.subscribed? returns false when topic given' do
+        ChalkDust.subscribed?(user, :to => post, :topic => 'family').should be_false
+      end
+    end
+
+    context 'connection between subjects with topic' do
+      before { ChalkDust::Connection.create!(:subscriber => user, :publisher => post, :topic => 'family') }
+
+      it '.subscribed? returns true when given topic matches' do
+        ChalkDust.subscribed?(user, :to => post, :topic => 'family').should be_true
+      end
+
+      it '.subscribed? returns false when no topic given' do
+        ChalkDust.subscribed?(user, :to => post).should be_false
+      end
+
+      it '.subscribed? returns false when topic does not match' do
+        ChalkDust.subscribed?(user, :to => post, :topic => 'work').should be_false
+      end
+    end
+
+    context 'connection between subjects with no topic' do
+      before { ChalkDust::Connection.create!(:subscriber => user, :publisher => post) }
+
+      it '.subscribed? returns true when no topic given' do
+        ChalkDust.subscribed?(user, :to => post).should be_true
+      end
+
+      it '.subscribed? returns false when topic given' do
+        ChalkDust.subscribed?(user, :to => post, :topic => 'family').should be_false
+      end
     end
   end
 end
