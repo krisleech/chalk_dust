@@ -9,7 +9,7 @@ module ChalkDust
     undirected = options.fetch(:undirected, false)
     topic      = options.fetch(:topic, blank_topic)
 
-    return if subscribed?(subscriber, :to => publisher)
+    return if subscribed?(subscriber, :to => publisher, :topic => topic)
 
     Connection.create(:subscriber => subscriber,
                       :publisher => publisher,
@@ -28,13 +28,15 @@ module ChalkDust
                       :topic      => topic)
   end
 
-  def self.subscribers_of(publisher)
-    Connection.for_publisher(publisher).map(&:subscriber)
+  def self.subscribers_of(publisher, options = {})
+    topic = options.fetch(:topic, blank_topic)
+    Connection.for_publisher(publisher, :topic => topic).map(&:subscriber)
   end
 
   def self.subscribed?(subscriber, options)
     publisher = options.fetch(:to)
-    subscribers_of(publisher).include?(subscriber)
+    topic     = options.fetch(:topic, blank_topic)
+    subscribers_of(publisher, :topic => topic).include?(subscriber)
   end
 
   def self.self_subscribe(publisher_subscriber)
@@ -46,7 +48,7 @@ module ChalkDust
   def self.publish_event(performer, event, target, options = {})
     root_publisher = options.fetch(:root, target)
     topic          = options.fetch(:topic, blank_topic)
-    subscribers_of(root_publisher).map do |subscriber|
+    subscribers_of(root_publisher, :topic => topic).map do |subscriber|
       ActivityItem.create(:performer => performer,
                           :event     => event,
                           :target    => target,

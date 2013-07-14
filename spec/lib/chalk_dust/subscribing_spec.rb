@@ -86,13 +86,22 @@ describe ChalkDust do
   end
 
   describe 'fetching subscriptions' do
-    it '.subscriptions_of returns subscribers to given object' do
-      user = User.create!
-      post = Post.create!
+    let(:user) { User.create! }
+    let(:post) { Post.create! }
 
-      ChalkDust::Connection.create!(:subscriber => user, :publisher => post)
+    context 'subjects connected with no topic' do
+      before { ChalkDust::Connection.create!(:subscriber => user, :publisher => post) }
 
-      ChalkDust.subscribers_of(post).should == [user]
+      it { ChalkDust.subscribers_of(post).should == [user] }
+      it { ChalkDust.subscribers_of(post, :topic => 'family').should == [] }
+    end
+
+    context 'subjects connected with topic' do
+      before { ChalkDust::Connection.create!(:subscriber => user, :publisher => post, :topic => 'family') }
+
+      it { ChalkDust.subscribers_of(post).should == [] }
+      it { ChalkDust.subscribers_of(post, :topic => 'family').should == [user] }
+      it { ChalkDust.subscribers_of(post, :topic => 'work').should == [] }
     end
   end
 
