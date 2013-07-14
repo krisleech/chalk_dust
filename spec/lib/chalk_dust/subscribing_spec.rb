@@ -15,6 +15,16 @@ describe ChalkDust do
       connection.publisher.should == post
     end
 
+    it '.subscribe is a noop when objects already connected' do
+      user = User.create!
+      post = Post.create!
+
+      expect {
+        ChalkDust.subscribe(user, :to => post)
+        ChalkDust.subscribe(user, :to => post)
+      }.to change{ ChalkDust::Connection.count }.by(1)
+    end
+
     it '.self_subscribe connects object to itself' do
       user = User.create!
 
