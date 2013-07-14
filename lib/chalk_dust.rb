@@ -9,6 +9,8 @@ module ChalkDust
     undirected = options.fetch(:undirected, false)
     topic      = options.fetch(:topic, blank_topic)
 
+    return if subscribed?(subscriber, :to => publisher)
+
     Connection.create(:subscriber => subscriber,
                       :publisher => publisher,
                       :topic => topic)
