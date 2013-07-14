@@ -15,7 +15,7 @@ describe ChalkDust do
       connection.publisher.should == post
     end
 
-    it '.subscribe is a noop when objects already connected' do
+    it '.subscribe is a noop when objects already connected with no topic' do
       user = User.create!
       post = Post.create!
 
@@ -23,6 +23,26 @@ describe ChalkDust do
         ChalkDust.subscribe(user, :to => post)
         ChalkDust.subscribe(user, :to => post)
       }.to change{ ChalkDust::Connection.count }.by(1)
+    end
+
+    it '.subscribe is a noop when objects already connected with same topic' do
+      user = User.create!
+      post = Post.create!
+
+      expect {
+        ChalkDust.subscribe(user, :to => post, :topic => 'family')
+        ChalkDust.subscribe(user, :to => post, :topic => 'family')
+      }.to change{ ChalkDust::Connection.count }.by(1)
+    end
+
+    it '.subscribe happens when objects connected but have different topics' do
+      user = User.create!
+      post = Post.create!
+
+      expect {
+        ChalkDust.subscribe(user, :to => post, :topic => 'family')
+        ChalkDust.subscribe(user, :to => post, :topic => 'work')
+      }.to change{ ChalkDust::Connection.count }.by(2)
     end
 
     it '.self_subscribe connects object to itself' do
