@@ -8,6 +8,11 @@ module ChalkDust
             :publisher_type => publisher.class.to_s)
     end
 
+    def self.for_subscriber(subscriber)
+      where(:subscriber_id => subscriber.id,
+            :subscriber_type => subscriber.class.to_s)
+    end
+    
     def self.delete(options)
       publisher  = options.fetch(:publisher)
       subscriber = options.fetch(:subscriber)
