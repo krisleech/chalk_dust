@@ -30,6 +30,10 @@ module ChalkDust
     Connection.for_publisher(publisher).map(&:subscriber)
   end
 
+  def self.subscriptions_by(subscriber)
+    Connection.for_subscriber(subscriber).map(&:publisher)
+  end  
+
   def self.subscribed?(subscriber, options)
     publisher = options.fetch(:to)
     subscribers_of(publisher).include?(subscriber)
