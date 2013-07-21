@@ -29,7 +29,7 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
-  add_index :connections, [:publisher_id, :publisher_type, :topic], :unique => true
+  add_index :connections, [:subscriber_id, :subscriber_type, :publisher_id, :publisher_type, :topic], :unique => true, :name => 'subscriber_publisher_topic'
 
   create_table :activity_items, :force => true do |t|
     t.integer :performer_id

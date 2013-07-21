@@ -9,8 +9,6 @@ module ChalkDust
     undirected = options.fetch(:undirected, false)
     topic      = options.fetch(:topic, blank_topic)
 
-    return if subscribed?(subscriber, :to => publisher, :topic => topic)
-
     Connection.create(:subscriber => subscriber,
                       :publisher => publisher,
                       :topic => topic)
@@ -18,6 +16,9 @@ module ChalkDust
     Connection.create(:subscriber => publisher,
                       :publisher => subscriber,
                       :topic => topic) if undirected
+
+  rescue ActiveRecord::RecordNotUnique
+    # already subscribed, do nothing
   end
 
   def self.unsubscribe(subscriber, options)
