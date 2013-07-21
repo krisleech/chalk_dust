@@ -3,9 +3,12 @@ module ChalkDust
     belongs_to :publisher,  :polymorphic => true
     belongs_to :subscriber, :polymorphic => true
 
-    def self.for_publisher(publisher)
-      where(:publisher_id => publisher.id,
-            :publisher_type => publisher.class.to_s)
+    def self.for_publisher(publisher, options)
+      topic = options.fetch(:topic)
+
+      where(:publisher_id   => publisher.id,
+            :publisher_type => publisher.class.to_s,
+            :topic          => topic)
     end
 
     def self.delete(options)
