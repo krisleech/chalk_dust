@@ -30,7 +30,7 @@ module ChalkDust
     Connection.for_publisher(publisher).map(&:subscriber)
   end
 
-  def self.publications_for(subscriber)
+  def self.publishes_for(subscriber)
     Connection.for_subscriber(subscriber).map(&:publisher)
   end  
 
