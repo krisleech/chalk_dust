@@ -33,6 +33,10 @@ module ChalkDust
     Connection.for_publisher(publisher, :topic => topic).map(&:subscriber)
   end
 
+  def self.publishes_for(subscriber)
+    Connection.for_subscriber(subscriber).map(&:publisher)
+  end  
+
   def self.subscribed?(subscriber, options)
     publisher = options.fetch(:to)
     topic     = options.fetch(:topic, blank_topic)
