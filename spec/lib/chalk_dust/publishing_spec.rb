@@ -74,5 +74,17 @@ describe 'publishing' do
 
     # pending 'target root can be set by the `activity_root` method on the target'
   end
+
+  describe 'fetching publications' do
+    it '.publishers_of returns publishers of given object' do
+      user = User.create!
+      post = Post.create!
+
+      ChalkDust::Connection.create!(:subscriber => user, :publisher => post)
+
+      ChalkDust.publishers_of(user).should == [post]
+    end
+  end
+  
 end
 
