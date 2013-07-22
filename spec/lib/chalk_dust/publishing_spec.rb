@@ -73,13 +73,13 @@ describe 'publishing' do
     end
     
     describe 'fetching publications' do
-      it '.publications_for returns publications for given subscriber' do
+      it '.publishes_for returns publications for given subscriber' do
         user = User.create!
         post = Post.create!
   
         ChalkDust::Connection.create!(:subscriber => user, :publisher => post)
   
-        ChalkDust.publications_for(user).should == [post]
+        ChalkDust.publishes_for(user).should == [post]
       end
     end
     
