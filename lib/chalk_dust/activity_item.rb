@@ -4,6 +4,8 @@ module ChalkDust
     belongs_to :target,    :polymorphic => true
     belongs_to :owner,     :polymorphic => true
 
+    attr_accessible :publisher, :subscriber
+
     validates :event, :presence => true
 
     def self.for_owner(owner)
