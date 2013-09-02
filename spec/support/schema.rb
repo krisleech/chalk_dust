@@ -29,6 +29,8 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  add_index :connections, [:publisher_id, :publisher_type, :topic], :unique => true
+
   create_table :activity_items, :force => true do |t|
     t.integer :performer_id
     t.string  :performer_type
@@ -45,4 +47,7 @@ ActiveRecord::Schema.define do
 
     t.timestamps
   end
+
+  add_index :activity_items, [:owner_id, :owner_type, :created_at]
+  add_index :activity_items, [:owner_id, :owner_type, :created_at, :topic], :name => 'activity_items_owner_id_type_created_at_topic'
 end

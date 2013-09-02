@@ -9,7 +9,7 @@ class ChalkDustCreateTables < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :connections, [:publisher_id, :publisher_type, :topic]
+    add_index :connections, [:publisher_id, :publisher_type, :topic], :unique => true
 
     create_table :activity_items, :force => true do |t|
       t.integer :performer_id
