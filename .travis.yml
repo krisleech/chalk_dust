@@ -6,8 +6,8 @@ rvm:
   - '1.9.2'
   - '1.9.3'
   - '2.0.0'
-  - jruby-19mode
-  - jruby-20mode
+  - jruby-d19
+  - jruby-d20
 matrix:
   exclude:
     # ActiveRecord 4.0 requires Ruby 1.9.3 or better
