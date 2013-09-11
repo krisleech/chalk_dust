@@ -157,10 +157,20 @@ Contributions welcome, please fork and send a pull request.
 
 ## Running Specs
 
+To run the specs for all supported combinations of Ruby and ActiveRecord:
+
+```
+wwtd
+```
+
+To run the specs for a specific version of ActiveRecord:
+
 ```
 env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-3.0 bundle exec rake
 env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-4.0 bundle exec rake
 ```
+
+Note: both `rake` (default task) and `rspec` are the same.
 
 ## Thanks
 

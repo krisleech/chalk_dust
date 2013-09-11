@@ -9,4 +9,5 @@ end
 
 group :development do
   gem 'guard-rspec'
+  gem 'wwtd'
 end

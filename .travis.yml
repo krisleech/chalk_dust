@@ -1,4 +1,5 @@
 language: ruby
+bundler_args: --without development
 gemfile: 
   - gemfiles/activerecord-3.0
   - gemfiles/activerecord-4.0
