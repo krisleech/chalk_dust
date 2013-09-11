@@ -8,6 +8,7 @@ group :test do
 end
 
 group :development do
+  gem 'rake'
   gem 'bundler'
   gem 'simplecov'
   gem 'guard-rspec'

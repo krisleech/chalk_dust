@@ -166,11 +166,9 @@ wwtd
 To run the specs for a specific version of ActiveRecord:
 
 ```
-env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-3.0 bundle exec rake
-env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-4.0 bundle exec rake
+env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-3.0 bundle exec rspec spec
+env BUNDLE_GEMFILE=$PWD/gemfiles/activerecord-4.0 bundle exec rspec spec
 ```
-
-Note: both `rake` (default task) and `rspec` are the same.
 
 ## Thanks
 
