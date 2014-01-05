@@ -18,6 +18,7 @@ user might publish activities with topics of 'family' or 'work'.
 [![Code Climate](https://codeclimate.com/github/krisleech/chalk_dust.png)](https://codeclimate.com/github/krisleech/chalk_dust)
 [![Build Status](https://travis-ci.org/krisleech/chalk_dust.png?branch=master)](https://travis-ci.org/krisleech/chalk_dust)
 [![endorse](https://api.coderwall.com/krisleech/endorsecount.png)](https://coderwall.com/krisleech)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/krisleech/chalk_dust/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Installation
 
